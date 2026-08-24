@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Government Schemes{% endblock %}
+{% block content %}
+<div class="page-head">
+    <span class="pill">🏛️ GOVERNMENT SUPPORT</span>
+    <h1>Government Schemes</h1>
+    <p>Important schemes in one place, with links to official information.</p>
+</div>
+
+<div class="cards">
+{% for scheme in schemes %}
+    <div class="scheme-card">
+        <div class="feature-icon">🏛️</div>
+        <h3>{{ scheme["name"] }}</h3>
+        <p>{{ scheme["description"] }}</p>
+        <a class="btn primary full" href="{{ scheme["link"] }}" target="_blank" rel="noopener">Official Information ↗</a>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}
