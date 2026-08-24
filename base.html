@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Kisan Connect{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<nav class="navbar">
+    <a class="brand" href="{{ url_for('index') }}">🌾 Kisan Connect</a>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <div id="navlinks" class="navlinks">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('crop_advisory') }}">🌱 Crop Advisory</a>
+        <a href="{{ url_for('inputs') }}">🧪 Inputs</a>
+        <a href="{{ url_for('schemes') }}">🏛️ Schemes</a>
+        <a href="{{ url_for('transport') }}">🚚 Transport</a>
+        <a href="{{ url_for('market') }}">🛒 Direct Market</a>
+    </div>
+</nav>
+
+<main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <p>🌾 Kisan Connect — Farmer problems, one platform.</p>
+    <small>Prototype for educational/model demonstration.</small>
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

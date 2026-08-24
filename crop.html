@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Crop Advisory{% endblock %}
+{% block content %}
+<div class="page-head">
+    <span class="pill">🌱 CROP ADVISORY</span>
+    <h1>What should I plant?</h1>
+    <p>Enter basic farm information to get a simple prototype recommendation.</p>
+</div>
+
+<div class="two-col">
+    <form class="form-card" method="POST">
+        <label>Soil Type</label>
+        <select name="soil" required>
+            <option value="">Select soil</option>
+            <option>Black</option>
+            <option>Alluvial</option>
+            <option>Red</option>
+            <option>Sandy</option>
+        </select>
+
+        <label>Water Availability</label>
+        <select name="water" required>
+            <option value="">Select water availability</option>
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+        </select>
+
+        <label>Season</label>
+        <select name="season" required>
+            <option value="">Select season</option>
+            <option>Kharif</option>
+            <option>Rabi</option>
+            <option>Zaid</option>
+        </select>
+
+        <label>Land Area (acres)</label>
+        <input type="number" name="area" step="0.1" min="0.1" required>
+
+        <button class="btn primary full" type="submit">Get Recommendation</button>
+    </form>
+
+    <div class="result-card">
+        {% if result %}
+            <span class="pill">RECOMMENDATION</span>
+            <h2>Consider these crops:</h2>
+            {% for crop in result.crops %}
+                <div class="recommend">{{ loop.index }}. 🌾 {{ crop }}</div>
+            {% endfor %}
+            <p class="note">Based on: {{ result.soil }} soil · {{ result.water }} water · {{ result.season }} · {{ result.area }} acres.</p>
+            <small>Demo only — real farming decisions should use local agronomist, weather, soil-test and market-price data.</small>
+        {% else %}
+            <div class="big-emoji">🌾</div>
+            <h2>Smart Crop Suggestion</h2>
+            <p>Fill the form to see a recommendation.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
